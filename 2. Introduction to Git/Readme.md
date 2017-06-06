@@ -1,4 +1,4 @@
-# 6. Source Control using GitHub
+# 2. Introduction to GitHub
 ## Introduction
 Source control using platforms like GitHub is a very important skill to have and you'll most likely use something like GitHub as a professional software developer. Git is the technology that powers GitHub and it is one of many different types of source control tools which helps manage codebases by recording changes to code over time. Without source control, it would be very difficult to work together in a team environment.
 
