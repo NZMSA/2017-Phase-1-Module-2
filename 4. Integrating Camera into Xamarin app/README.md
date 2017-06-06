@@ -18,7 +18,7 @@ public override void OnRequestPermissionsResult(int requestCode, string[] permis
 }
 ```
 
-* If your application is targetting Android N (API 24) then you must add the following lines to your manifest file
+* If your application is targeting Android N (API 24) then you must add the following lines to your manifest file inside the application tag.
 
 ```
 <provider android:name="android.support.v4.content.FileProvider" 
