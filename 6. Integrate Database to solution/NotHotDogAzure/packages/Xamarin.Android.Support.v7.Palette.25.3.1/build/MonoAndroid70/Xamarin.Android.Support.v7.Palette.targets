@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <!-- Unique key for cached download -->
+        <_XbdKey_palettev7>androidsupport-25.3.1/palettev7</_XbdKey_palettev7>
+        
+        <!-- Path to .aar file within the extracted contents of the cached download -->
+        <_XbdAarFile_palettev7>m2repository\com\android\support\palette-v7\25.3.1\palette-v7-25.3.1.aar</_XbdAarFile_palettev7>
+        
+        <!-- Full path to .aar file, assuming we had to download to the cache - we reset this later if it is in the sdk -->
+        <_XbdAarFileFullPath_palettev7>$(XamarinBuildDownloadDir)$(_XbdKey_palettev7)\palette-v7-25.3.1.aar</_XbdAarFileFullPath_palettev7>
+
+        <!-- Assembly name to embed .aar in -->
+        <_XbdAssemblyName_palettev7>Xamarin.Android.Support.v7.Palette</_XbdAssemblyName_palettev7>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <XamarinBuildRestoreResources Include="_XbdRestoreItems_palettev7"/>
+    </ItemGroup>
+
+    <Target Name="_XbdRestoreItems_palettev7">
+        <!-- Check if the aar file is in the android sdk already and change the path to use to it, if it's found -->
+        <CreateProperty Value="$(AndroidSdkDirectory)\extras\android\$(_XbdAarFile_palettev7)" Condition="Exists('$(AndroidSdkDirectory)\extras\android\$(_XbdAarFile_palettev7)')">
+            <Output PropertyName="_XbdAarFileFullPath_palettev7" TaskParameter="Value" />
+        </CreateProperty>
+
+        <ItemGroup>
+            <XamarinBuildDownloadPartialZip Include="$(_XbdKey_palettev7)" Condition="!Exists('$(_XbdAarFileFullPath_palettev7)')">
+                <Url>https://dl-ssl.google.com/android/repository/android_m2repository_r47.zip</Url>
+                <ToFile>palette-v7-25.3.1.aar</ToFile>
+                <RangeStart>21907685</RangeStart>
+                <RangeEnd>21929820</RangeEnd>
+                <Md5>2e1f1c9bf5be0b80da4637c793015afb</Md5>
+                <CustomErrorMessage>Please open the Android SDK Manager and install the latest version of 'Android Support Repository' from the 'Extras' section, and then reload your solution.</CustomErrorMessage>
+                <CustomErrorCode>XBD404</CustomErrorCode>
+            </XamarinBuildDownloadPartialZip>
+        </ItemGroup>
+
+        <ItemGroup>
+            <XamarinBuildDownloadRestoreAssemblyAar Include="$(_XbdAarFileFullPath_palettev7)">
+                <LogicalName>__AndroidLibraryProjects__.zip</LogicalName>
+                <AssemblyName>$(_XbdAssemblyName_palettev7)</AssemblyName>
+            </XamarinBuildDownloadRestoreAssemblyAar>
+        </ItemGroup>
+    </Target>
+</Project>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <!-- Unique key for cached download -->
+        <_XbdKey_animatedvectordrawable>androidsupport-25.3.1/animatedvectordrawable</_XbdKey_animatedvectordrawable>
+        
+        <!-- Path to .aar file within the extracted contents of the cached download -->
+        <_XbdAarFile_animatedvectordrawable>m2repository\com\android\support\animated-vector-drawable\25.3.1\animated-vector-drawable-25.3.1.aar</_XbdAarFile_animatedvectordrawable>
+        
+        <!-- Full path to .aar file, assuming we had to download to the cache - we reset this later if it is in the sdk -->
+        <_XbdAarFileFullPath_animatedvectordrawable>$(XamarinBuildDownloadDir)$(_XbdKey_animatedvectordrawable)\animated-vector-drawable-25.3.1.aar</_XbdAarFileFullPath_animatedvectordrawable>
+
+        <!-- Assembly name to embed .aar in -->
+        <_XbdAssemblyName_animatedvectordrawable>Xamarin.Android.Support.Animated.Vector.Drawable</_XbdAssemblyName_animatedvectordrawable>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <XamarinBuildRestoreResources Include="_XbdRestoreItems_animatedvectordrawable"/>
+    </ItemGroup>
+
+    <Target Name="_XbdRestoreItems_animatedvectordrawable">
+        <!-- Check if the aar file is in the android sdk already and change the path to use to it, if it's found -->
+        <CreateProperty Value="$(AndroidSdkDirectory)\extras\android\$(_XbdAarFile_animatedvectordrawable)" Condition="Exists('$(AndroidSdkDirectory)\extras\android\$(_XbdAarFile_animatedvectordrawable)')">
+            <Output PropertyName="_XbdAarFileFullPath_animatedvectordrawable" TaskParameter="Value" />
+        </CreateProperty>
+
+        <ItemGroup>
+            <XamarinBuildDownloadPartialZip Include="$(_XbdKey_animatedvectordrawable)" Condition="!Exists('$(_XbdAarFileFullPath_animatedvectordrawable)')">
+                <Url>https://dl-ssl.google.com/android/repository/android_m2repository_r47.zip</Url>
+                <ToFile>animated-vector-drawable-25.3.1.aar</ToFile>
+                <RangeStart>116711216</RangeStart>
+                <RangeEnd>116726340</RangeEnd>
+                <Md5>35cf4a7b9637037d9056adfc00dbe801</Md5>
+                <CustomErrorMessage>Please open the Android SDK Manager and install the latest version of 'Android Support Repository' from the 'Extras' section, and then reload your solution.</CustomErrorMessage>
+                <CustomErrorCode>XBD404</CustomErrorCode>
+            </XamarinBuildDownloadPartialZip>
+        </ItemGroup>
+
+        <ItemGroup>
+            <XamarinBuildDownloadRestoreAssemblyAar Include="$(_XbdAarFileFullPath_animatedvectordrawable)">
+                <LogicalName>__AndroidLibraryProjects__.zip</LogicalName>
+                <AssemblyName>$(_XbdAssemblyName_animatedvectordrawable)</AssemblyName>
+            </XamarinBuildDownloadRestoreAssemblyAar>
+        </ItemGroup>
+    </Target>
+</Project>

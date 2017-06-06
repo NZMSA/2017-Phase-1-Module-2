@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <!-- Unique key for cached download -->
+    <_XbdKey_supportvectordrawable>androidsupport-25.3.1/supportvectordrawable</_XbdKey_supportvectordrawable>
+    <!-- Path to .aar file within the extracted contents of the cached download -->
+    <_XbdAarFile_supportvectordrawable>m2repository\com\android\support\support-vector-drawable\25.3.1\support-vector-drawable-25.3.1.aar</_XbdAarFile_supportvectordrawable>
+    <!-- Full path to .aar file, assuming we had to download to the cache - we reset this later if it is in the sdk -->
+    <_XbdAarFileFullPath_supportvectordrawable>$(XamarinBuildDownloadDir)$(_XbdKey_supportvectordrawable)\support-vector-drawable-25.3.1.aar</_XbdAarFileFullPath_supportvectordrawable>
+    <!-- Assembly name to embed .aar in -->
+    <_XbdAssemblyName_supportvectordrawable>Xamarin.Android.Support.Vector.Drawable</_XbdAssemblyName_supportvectordrawable>
+  </PropertyGroup>
+  <ItemGroup>
+    <XamarinBuildRestoreResources Include="_XbdRestoreItems_supportvectordrawable" />
+  </ItemGroup>
+  <Target Name="_XbdRestoreItems_supportvectordrawable">
+    <!-- Check if the aar file is in the android sdk already and change the path to use to it, if it's found -->
+    <CreateProperty Value="$(AndroidSdkDirectory)\extras\android\$(_XbdAarFile_supportvectordrawable)" Condition="Exists('$(AndroidSdkDirectory)\extras\android\$(_XbdAarFile_supportvectordrawable)')">
+      <Output PropertyName="_XbdAarFileFullPath_supportvectordrawable" TaskParameter="Value" />
+    </CreateProperty>
+    <ItemGroup>
+      <XamarinBuildDownloadPartialZip Include="$(_XbdKey_supportvectordrawable)" Condition="!Exists('$(_XbdAarFileFullPath_supportvectordrawable)')">
+        <Url>https://dl-ssl.google.com/android/repository/android_m2repository_r47.zip</Url>
+        <ToFile>support-vector-drawable-25.3.1.aar</ToFile>
+        <RangeStart>17344217</RangeStart>
+        <RangeEnd>17382396</RangeEnd>
+        <Md5>8ca3a9c9f8d11521428a273732b7625c</Md5>
+        <CustomErrorMessage>Please open the Android SDK Manager and install the latest version of 'Android Support Repository' from the 'Extras' section, and then reload your solution.</CustomErrorMessage>
+        <CustomErrorCode>XBD404</CustomErrorCode>
+      </XamarinBuildDownloadPartialZip>
+    </ItemGroup>
+    <ItemGroup>
+      <XamarinBuildDownloadRestoreAssemblyAar Include="$(_XbdAarFileFullPath_supportvectordrawable)">
+        <LogicalName>__AndroidLibraryProjects__.zip</LogicalName>
+        <AssemblyName>$(_XbdAssemblyName_supportvectordrawable)</AssemblyName>
+      </XamarinBuildDownloadRestoreAssemblyAar>
+    </ItemGroup>
+  </Target>
+  <PropertyGroup>
+    <VectorDrawableCheckBuildToolsVersionTaskFilename Condition=" '$(VectorDrawableCheckBuildToolsVersionTaskFilename)' == '' ">$(MSBuildThisFileDirectory)Xamarin.Android.Support.Tasks.VectorDrawable.dll</VectorDrawableCheckBuildToolsVersionTaskFilename>
+  </PropertyGroup>
+  <PropertyGroup>
+    <VectorDrawableCheckBuildToolsVersionTaskDependsOn>
+       _ResolveMonoAndroidSdks;$(VectorDrawableCheckBuildToolsVersionTaskDependsOn);
+    </VectorDrawableCheckBuildToolsVersionTaskDependsOn>
+    <VectorDrawableCheckBuildToolsVersionTaskBeforeTargets>
+      _UpdateAndroidResgen;$(VectorDrawableCheckBuildToolsVersionTaskBeforeTargets);
+    </VectorDrawableCheckBuildToolsVersionTaskBeforeTargets>
+  </PropertyGroup>
+  <UsingTask AssemblyFile="$(VectorDrawableCheckBuildToolsVersionTaskFilename)" TaskName="Xamarin.Android.Support.Tasks.VectorDrawableCheckBuildToolsVersionTask" />
+  <Target Name="VectorDrawableCheckBuildToolsVersionTask" Condition="" BeforeTargets="$(VectorDrawableCheckBuildToolsVersionTaskBeforeTargets)">
+    <VectorDrawableCheckBuildToolsVersionTask AndroidSdkBuildToolsPath="$(AndroidSdkBuildToolsPath)"></VectorDrawableCheckBuildToolsVersionTask>
+  </Target>
+  <Target Name="_XamarinAndroidSupportVectorDrawableArgs" BeforeTargets="_UpdateAndroidResgen">
+    <!-- Adds an argument to the call to aapt to support vectors -->
+    <PropertyGroup Condition=" '$(AndroidResgenExtraArgs)' != '' AND !$(AndroidResgenExtraArgs.Contains('--no-version-vectors'))">
+      <AndroidResgenExtraArgs>$(AndroidResgenExtraArgs.TrimEnd(' ')) --no-version-vectors</AndroidResgenExtraArgs>
+    </PropertyGroup>
+    <PropertyGroup Condition="'$(AndroidResgenExtraArgs)' == ''">
+      <AndroidResgenExtraArgs>--no-version-vectors</AndroidResgenExtraArgs>
+    </PropertyGroup>
+  </Target>
+</Project>

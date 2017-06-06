@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <!-- Unique key for cached download -->
+        <_XbdKey_supportmediacompat>androidsupport-25.3.1/supportmediacompat</_XbdKey_supportmediacompat>
+        
+        <!-- Path to .aar file within the extracted contents of the cached download -->
+        <_XbdAarFile_supportmediacompat>m2repository\com\android\support\support-media-compat\25.3.1\support-media-compat-25.3.1.aar</_XbdAarFile_supportmediacompat>
+        
+        <!-- Full path to .aar file, assuming we had to download to the cache - we reset this later if it is in the sdk -->
+        <_XbdAarFileFullPath_supportmediacompat>$(XamarinBuildDownloadDir)$(_XbdKey_supportmediacompat)\support-media-compat-25.3.1.aar</_XbdAarFileFullPath_supportmediacompat>
+
+        <!-- Assembly name to embed .aar in -->
+        <_XbdAssemblyName_supportmediacompat>Xamarin.Android.Support.Media.Compat</_XbdAssemblyName_supportmediacompat>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <XamarinBuildRestoreResources Include="_XbdRestoreItems_supportmediacompat"/>
+    </ItemGroup>
+
+    <Target Name="_XbdRestoreItems_supportmediacompat">
+        <!-- Check if the aar file is in the android sdk already and change the path to use to it, if it's found -->
+        <CreateProperty Value="$(AndroidSdkDirectory)\extras\android\$(_XbdAarFile_supportmediacompat)" Condition="Exists('$(AndroidSdkDirectory)\extras\android\$(_XbdAarFile_supportmediacompat)')">
+            <Output PropertyName="_XbdAarFileFullPath_supportmediacompat" TaskParameter="Value" />
+        </CreateProperty>
+
+        <ItemGroup>
+            <XamarinBuildDownloadPartialZip Include="$(_XbdKey_supportmediacompat)" Condition="!Exists('$(_XbdAarFileFullPath_supportmediacompat)')">
+                <Url>https://dl-ssl.google.com/android/repository/android_m2repository_r47.zip</Url>
+                <ToFile>support-media-compat-25.3.1.aar</ToFile>
+                <RangeStart>3558971</RangeStart>
+                <RangeEnd>3840696</RangeEnd>
+                <Md5>83e1a48c2907a86757e619e9f9c1933e</Md5>
+                <CustomErrorMessage>Please open the Android SDK Manager and install the latest version of 'Android Support Repository' from the 'Extras' section, and then reload your solution.</CustomErrorMessage>
+                <CustomErrorCode>XBD404</CustomErrorCode>
+            </XamarinBuildDownloadPartialZip>
+        </ItemGroup>
+
+        <ItemGroup>
+            <XamarinBuildDownloadRestoreAssemblyAar Include="$(_XbdAarFileFullPath_supportmediacompat)">
+                <LogicalName>__AndroidLibraryProjects__.zip</LogicalName>
+                <AssemblyName>$(_XbdAssemblyName_supportmediacompat)</AssemblyName>
+            </XamarinBuildDownloadRestoreAssemblyAar>
+        </ItemGroup>
+    </Target>
+</Project>

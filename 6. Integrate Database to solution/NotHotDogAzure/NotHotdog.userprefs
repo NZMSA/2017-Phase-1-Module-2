@@ -1,0 +1,14 @@
+﻿<Properties StartupConfiguration="{A0E56863-B276-4A5A-9AF9-74AD4CE6725A}|Default">
+  <MonoDevelop.Ide.Workbench ActiveDocument="NotHotdog/AzureTables.xaml">
+    <Files>
+      <File FileName="NotHotdog/AzureTables.xaml" Line="4" Column="9" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.NotHotdog.iOS PreferredExecutionTarget="MonoDevelop.IPhone.IPhoneSimulatorTarget.005C608F-879B-448A-ACE7-5B55E007F272" />
+</Properties>

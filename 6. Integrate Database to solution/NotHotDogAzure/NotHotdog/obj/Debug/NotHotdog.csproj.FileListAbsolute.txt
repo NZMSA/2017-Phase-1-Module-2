@@ -1,0 +1,54 @@
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/NotHotdog.dll
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/NotHotdog.pdb
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Plugin.Media.Abstractions.dll
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Plugin.Media.dll
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Xamarin.Forms.Core.dll
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Xamarin.Forms.Platform.dll
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Xamarin.Forms.Xaml.dll
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Xamarin.Forms.Core.pdb
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Xamarin.Forms.Core.dll.mdb
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Xamarin.Forms.Core.xml
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Xamarin.Forms.Platform.pdb
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Xamarin.Forms.Platform.dll.mdb
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Xamarin.Forms.Xaml.pdb
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Xamarin.Forms.Xaml.dll.mdb
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Xamarin.Forms.Xaml.xml
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Plugin.Media.Abstractions.pdb
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Plugin.Media.Abstractions.xml
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Plugin.Media.pdb
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/bin/Debug/Plugin.Media.xml
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/obj/Debug/NotHotdog.csprojResolveAssemblyReference.cache
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/obj/Debug/NotHotdog.csproj.CoreCompileInputs.cache
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/obj/Debug/NotHotdog.App.xaml.g.cs
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/obj/Debug/NotHotdog.NotHotdogPage.xaml.g.cs
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/obj/Debug/NotHotdog.ResultPage.xaml.g.cs
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/obj/Debug/NotHotdog.dll
+/Users/dipeshtrikam/Desktop/NotHotdog/NotHotdog/obj/Debug/NotHotdog.pdb
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/obj/Debug/NotHotdog.csprojResolveAssemblyReference.cache
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/obj/Debug/NotHotdog.csproj.CoreCompileInputs.cache
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/obj/Debug/NotHotdog.App.xaml.g.cs
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/obj/Debug/NotHotdog.NotHotdogPage.xaml.g.cs
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/obj/Debug/NotHotdog.ResultPage.xaml.g.cs
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/obj/Debug/NotHotdog.AzureTables.xaml.g.cs
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/obj/Debug/NotHotdog.MainPage.xaml.g.cs
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/obj/Debug/NotHotdog.dll
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/obj/Debug/NotHotdog.pdb
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/NotHotdog.dll
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/NotHotdog.pdb
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Plugin.Media.Abstractions.dll
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Plugin.Media.dll
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Xamarin.Forms.Core.dll
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Xamarin.Forms.Platform.dll
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Xamarin.Forms.Xaml.dll
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Xamarin.Forms.Core.pdb
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Xamarin.Forms.Core.dll.mdb
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Xamarin.Forms.Core.xml
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Xamarin.Forms.Platform.pdb
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Xamarin.Forms.Platform.dll.mdb
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Xamarin.Forms.Xaml.pdb
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Xamarin.Forms.Xaml.dll.mdb
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Xamarin.Forms.Xaml.xml
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Plugin.Media.Abstractions.pdb
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Plugin.Media.Abstractions.xml
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Plugin.Media.pdb
+/Users/dipeshtrikam/Documents/Microsoft Student Partner/MSA_2017/Module 2 Training/6. Integrate Database to solution/NotHotDogAzure/NotHotdog/bin/Debug/Plugin.Media.xml
