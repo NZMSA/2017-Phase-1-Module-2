@@ -11,7 +11,7 @@ For Android, since API 23, much like on iOS, if you want to access the camera yo
 * Expand your Android project and open 'MainActivity.cs'
 * Add the following lines of code
 
-```
+```csharp
 public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
 {
 	PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -20,7 +20,7 @@ public override void OnRequestPermissionsResult(int requestCode, string[] permis
 
 * If your application is targeting Android N (API 24) then you must add the following lines to your manifest file inside the application tag.
 
-```
+```xml
 <provider android:name="android.support.v4.content.FileProvider" 
                 android:authorities="YOUR_APP_PACKAGE_NAME.fileprovider" 
                 android:exported="false" 
@@ -33,7 +33,7 @@ public override void OnRequestPermissionsResult(int requestCode, string[] permis
 * Inside the resouce file within your Android project, create a new folder called 'xml' and inside that folder, create a new .xml file called 'file_paths.xml'
 * Add the following lines of code to that file.
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
     <external-path name="my_images" path="Android/data/YOUR_APP_PACKAGE_NAME/files/Pictures" />
@@ -43,7 +43,7 @@ public override void OnRequestPermissionsResult(int requestCode, string[] permis
 
 For iOS, open info.plst and add the following lines to that file.
 
-```
+```xml
 <key>NSCameraUsageDescription</key>
 <string>This app needs access to the camera to take photos.</string>
 <key>NSPhotoLibraryUsageDescription</key>
@@ -57,7 +57,7 @@ For iOS, open info.plst and add the following lines to that file.
 * First we'll modify the layout of our main page.
 * Add the following lines of code
 
-```
+```xml
 <StackLayout BackgroundColor="White">
       <Button Text="Take Picture" TextColor="White" BackgroundColor="Green" Clicked="TakePicture_Clicked" />
       <Image x:Name="image" VerticalOptions="Start" />
@@ -66,7 +66,7 @@ For iOS, open info.plst and add the following lines to that file.
 
 * Navigate to your portable project and inside MainPage.xaml.cs, after creating our button that's going to trigger the camera, you're going to first check if we have permissions to use the camera before takeing a photo. Add the following lines of code.
 
-```
+```csharp
 var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
 var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
 
@@ -80,7 +80,7 @@ if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatu
 
 * To take a photo add the following lines of code
 
-```
+```csharp
 if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
 {
 	var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
@@ -104,7 +104,7 @@ else
 
 * To diplay the image add the following lines of code.
 
-```
+```csharp
 image.Source = ImageSource.FromStream(() =>
 {
 	var stream = file.GetStream();
