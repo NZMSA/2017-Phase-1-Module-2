@@ -9,6 +9,7 @@ namespace Tabs.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
+            Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
 
 			// Code for starting up the Xamarin Test Cloud Agent
 #if DEBUG
