@@ -14,14 +14,13 @@ namespace Tabs
 		public AzureTable()
         {
             InitializeComponent();
-
 		}
 
 		async void Handle_ClickedAsync(object sender, System.EventArgs e)
 		{
-			List<NotHotDogModel> timelines = await AzureManager.AzureManagerInstance.GetHotDogInformation();
+			List<NotHotDogModel> notHotDogInformation = await AzureManager.AzureManagerInstance.GetHotDogInformation();
 
-			HotDogList.ItemsSource = timelines;
+			HotDogList.ItemsSource = notHotDogInformation;
 		}
 
     }

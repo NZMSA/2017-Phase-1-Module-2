@@ -13,7 +13,7 @@ For full understanding of working with the backend please refer to the `2. Xamar
 The completed project of both the Xamarin and Bot are included in this folder.
 
 ### Important
-For this tutorial make sure you have an easy table in your mobile backend called `timeline`, as we reference it by name 
+For this tutorial make sure you have an easy table in your mobile backend called `NotHotDogModel`, as we reference it by name 
 
 ![Easy tables](photos/easy_tables.png)
 
@@ -22,9 +22,9 @@ For this tutorial make sure you have an easy table in your mobile backend called
 * [Video - Waiting](http://link.com)
 
 ## 1. Postman requests 
-Lets first see how our data looks like by making a GET request to `https://MOBILE_APP_URL.azurewebsites.net/tables/timeline` (replace `MOBILE_APP_URL` with your server name, for this demo its "hellotheretest").
+Lets first see how our data looks like by making a GET request to `https://MOBILE_APP_URL.azurewebsites.net/tables/NotHotDogModel` (replace `MOBILE_APP_URL` with your server name, for this demo its "hellotheretest").
 - /tables to access our easy tables
-- `/timeline` is the specific table we want to make requests to, so in the server `https://hellotheretest.azurewebsites.net/` there is an easytable called `timeline`
+- `/timeline` is the specific table we want to make requests to, so in the server `https://nothotdoginformation.azurewebsites.net/` there is an easytable called `NotHotDogModel`
 
 NOTE: When we make requests to our backend thats hosted as a MOBILE_APP, we need to add the following header to our requests
 ![Postman Headers](photos/postman_headers.png)
