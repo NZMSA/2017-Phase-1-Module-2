@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
-using Foundation;
+﻿using Foundation;
 using UIKit;
 
 namespace Tabs.iOS
@@ -14,7 +10,7 @@ namespace Tabs.iOS
         {
             global::Xamarin.Forms.Forms.Init();
 
-            // Code for starting up the Xamarin Test Cloud Agent
+			// Code for starting up the Xamarin Test Cloud Agent
 #if DEBUG
 			Xamarin.Calabash.Start();
 #endif
