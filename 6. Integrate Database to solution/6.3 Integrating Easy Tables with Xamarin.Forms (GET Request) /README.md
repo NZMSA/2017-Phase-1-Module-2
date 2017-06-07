@@ -79,7 +79,7 @@ public class AzureManager
 }
 ``` 
 
-Now if we want to access our `MobileServiceClient` in an activity we can add the following line, for the purpose of this tutorial we will be adding it to our `AzureTables.xaml.cs` file 
+Now if we want to access our `MobileServiceClient` in an activity we can add the following line, for the purpose of this tutorial we could add it to our `AzureTables.xaml.cs` file 
 ```Csharp
 public partial class AzureTable : ContentPage
 {
@@ -94,7 +94,6 @@ public partial class AzureTable : ContentPage
 
 }
 ``` 
-
 
 ### 6.3.4 Creating a table references
 For this demo we will consider a database table a `table`, so all code that accesses (READ) or modifies (CREATE, UPDATE) the table calls functions on a `MobileServiceTable` object. 
@@ -236,8 +235,6 @@ namespace Tabs
     public partial class AzureTable : ContentPage
     {
        
-		MobileServiceClient client = AzureManager.AzureManagerInstance.AzureClient;
-
 		public AzureTable()
         {
             InitializeComponent();

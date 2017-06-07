@@ -9,11 +9,10 @@ namespace Tabs
     public partial class AzureTable : ContentPage
     {
        
-		MobileServiceClient client = AzureManager.AzureManagerInstance.AzureClient;
-
-		public AzureTable()
+        public AzureTable()
         {
             InitializeComponent();
+
 		}
 
 		async void Handle_ClickedAsync(object sender, System.EventArgs e)
