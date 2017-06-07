@@ -268,6 +268,8 @@ public async Task<List<NotHotDogModel>> GetHotDogInformation() {
 }
 ``` 
 
+If you are stuck have a look at the completed project for this section.
+
 ### Extra Learning Resources
 * [Using App Service with Xamarin by Microsoft](https://azure.microsoft.com/en-us/documentation/articles/app-service-mobile-dotnet-how-to-use-client-library/)
 * [Using App Service with Xamarin by Xamarin - Outdated but good to understand](https://blog.xamarin.com/getting-started-azure-mobile-apps-easy-tables/)
