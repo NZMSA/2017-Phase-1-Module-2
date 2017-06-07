@@ -14,7 +14,7 @@ They are used for a basic horizontal or vertical layout.
 
 Replace the code in Main.xaml with the following code:
 
-```
+```xml
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -58,7 +58,7 @@ Try running the code for Android and Windows phone. You will notice that the but
 
 Let's add:
 
-```
+```csharp
 Clicked="OnButtonClicked"
 ```
 
@@ -66,7 +66,7 @@ inside the Xaml of the button.
 
 and 
 
-```
+```csharp
 async void OnButtonClicked(object sender, EventArgs args)
 {
     Button button = (Button)sender;
@@ -82,7 +82,7 @@ to MainPage.xaml.cs.
 
 Right-click App1 (Portable) > Add > New Item > Forms Page > Change name to Grid1.cs > Add
 
-```
+```csharp
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -132,7 +132,7 @@ namespace App1
 ```
 To link this to the first page, change the code inside the OnButtonClicked method inside MainPage.xaml.cs to: 
 
-```
+```csharp
 async void OnButtonClicked(object sender, EventArgs args)
 {
     Button button = (Button)sender;
@@ -155,11 +155,11 @@ React to touch input. Look and behaviour depends on the platform.
 
 An alternative to the code above is:
 
-```
+```csharp 
 x:Name="myButton"
 ```
 
-```
+```csharp
 myButton.Clicked += async (s, e) =>
 {
     Button button = (Button)s;
@@ -192,7 +192,7 @@ Somewhat advanced because of data binding. Using MVVM pattern.
 
 But can be made simpler using an ItemsSource.
 
-```
+```csharp
 var listView = new ListView();
 listView.ItemsSource = new string[]{
   "mono",
@@ -213,7 +213,7 @@ listView.ItemsSource.Add("monochrome");
 
 If you want this ItemSource to keep update when the array is changed, you need to use an Observable Collection:
 
-```
+```csharp
 ObservableCollection<Employees> employeeList = new ObservableCollection<Employees>();
 listView.ItemsSource = employeeList;
 
