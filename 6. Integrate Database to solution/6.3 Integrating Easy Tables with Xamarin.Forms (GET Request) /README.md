@@ -6,7 +6,7 @@ At the earlier sections, we would have already added it to our Nuget Packages. I
 - For Visual Studio: Right-click your project, click Manage NuGet Packages, search for the `Microsoft.Azure.Mobile.Client` package, then click Install.
 - For Xamarin Studio: Right-click your project, click Add > Add NuGet Packages, search for the `Microsoft.Azure.Mobile.Client` package, and then click Add Package.
 
-NOTE: Make sure to add it to all your solutions!
+#### `NOTE: Make sure to add it to all your solutions!`
 
 If we want to use this SDK we add the following using statement
 ```Csharp
@@ -50,49 +50,49 @@ So in `Moodify (Portable)`, create a `AzureManager.cs` file with,
 
 ```Csharp
 public class AzureManager
+{
+
+    private static AzureManager instance;
+    private MobileServiceClient client;
+
+    private AzureManager()
     {
+        this.client = new MobileServiceClient("MOBILE_APP_URL");
+    }
 
-        private static AzureManager instance;
-        private MobileServiceClient client;
+    public MobileServiceClient AzureClient
+    {
+        get { return client; }
+    }
 
-        private AzureManager()
+    public static AzureManager AzureManagerInstance
+    {
+        get
         {
-            this.client = new MobileServiceClient("MOBILE_APP_URL");
-        }
-
-        public MobileServiceClient AzureClient
-        {
-            get { return client; }
-        }
-
-        public static AzureManager AzureManagerInstance
-        {
-            get
-            {
-                if (instance == null) {
-                    instance = new AzureManager();
-                }
-
-                return instance;
+            if (instance == null) {
+                instance = new AzureManager();
             }
+
+            return instance;
         }
     }
+}
 ``` 
 
 Now if we want to access our `MobileServiceClient` in an activity we can add the following line, for the purpose of this tutorial we will be adding it to our `AzureTables.xaml.cs` file 
 ```Csharp
-     public partial class AzureTable : ContentPage
+public partial class AzureTable : ContentPage
+{
+    
+    MobileServiceClient client = AzureManager.AzureManagerInstance.AzureClient;
+
+    public AzureTable()
     {
-       
-		MobileServiceClient client = AzureManager.AzureManagerInstance.AzureClient;
-
-		public AzureTable()
-        {
-            InitializeComponent();
-
-		}
+        InitializeComponent();
 
     }
+
+}
 ``` 
 
 
@@ -119,9 +119,9 @@ To retrieve information about the table, we can invoke a `ToListAsync()` method 
 
 Lets create a `GetHotDogInformation` method in our `AzureManager.cs` file
 ```Csharp
-    public async Task<List<NotHotDogModel>> GetHotDogInformation() {
-        return await this.notHotDogTable.ToListAsync();
-    }
+public async Task<List<NotHotDogModel>> GetHotDogInformation() {
+    return await this.notHotDogTable.ToListAsync();
+}
 ``` 
 #### Your AzureManager.cs Class should like like the code snippet below now
 ```Csharp
@@ -263,9 +263,9 @@ namespace Tabs
 A LINQ query we may want to achieve is if we want to filter the data to only return high happiness songs. 
 We could do this by the following line, this grabs the NotHotDogModel information if it has a happiness of 0.5 or higher
 ```Csharp
-    public async Task<List<NotHotDogModel>> GetHotDogInformation() {
-        return await notHotDogTable.Where(notHotDogInformation => notHotDogInformation.Happiness > 0.5).ToListAsync();
-    }
+public async Task<List<NotHotDogModel>> GetHotDogInformation() {
+    return await notHotDogTable.Where(notHotDogInformation => notHotDogInformation.Happiness > 0.5).ToListAsync();
+}
 ``` 
 
 ### Extra Learning Resources
