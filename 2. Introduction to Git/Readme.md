@@ -152,3 +152,4 @@ Merge a branch with the currently selected branch. You can instead do a 'Pull Re
 * [GitHub Online Training](https://try.github.io/)
 * [GitHub Guide](https://guides.github.com/)
 * [Emmet Snippet Extension Cheat Sheet](http://docs.emmet.io/cheat-sheet/)
+* [Basic Git command for mac users](https://gist.github.com/albatrocity/1201187)
