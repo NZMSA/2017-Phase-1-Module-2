@@ -272,4 +272,3 @@ public async Task<List<NotHotDogModel>> GetHotDogInformation() {
 * [Using App Service with Xamarin by Microsoft](https://azure.microsoft.com/en-us/documentation/articles/app-service-mobile-dotnet-how-to-use-client-library/)
 * [Using App Service with Xamarin by Xamarin - Outdated but good to understand](https://blog.xamarin.com/getting-started-azure-mobile-apps-easy-tables/)
 * [ListView in Xamarin](https://developer.xamarin.com/guides/xamarin-forms/user-interface/listview/)
- No newline at end of file
