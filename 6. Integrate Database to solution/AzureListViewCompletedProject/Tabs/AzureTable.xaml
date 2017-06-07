@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout>
             <Button Text="See Photo Information" TextColor="White" BackgroundColor="Red" Clicked="Handle_ClickedAsync" />
-            <ListView x:Name="HotDogList" HasUnevenRows="True">
+            <ListView x:Name="HotDogList" HasUnevenRows="false">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
