@@ -39,10 +39,9 @@ namespace Tabs
 
             image.Source = ImageSource.FromStream(() =>
             {
-                var stream = file.GetStream();
-                file.Dispose();
-                return stream;
+                return file.GetStream();
             });
+
 
             await MakePredictionRequest(file);
         }
@@ -54,7 +53,7 @@ namespace Tabs
             return binaryReader.ReadBytes((int)stream.Length);
         }
 
-        static async Task MakePredictionRequest(MediaFile file)
+        async Task MakePredictionRequest(MediaFile file)
         {
             var client = new HttpClient();
             
@@ -68,10 +67,15 @@ namespace Tabs
 
             using (var content = new ByteArrayContent(byteData))
             {
+               
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 response = await client.PostAsync(url, content);
                 Debug.WriteLine(await response.Content.ReadAsStringAsync());
-            }
-        }
+                file.Dispose();
+			}
+
+			
+
+		}
     }
 }
