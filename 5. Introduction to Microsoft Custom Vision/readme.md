@@ -30,65 +30,133 @@ We have used the Prediction Endpoint to Test Images Programmatically
 
 ## Step 3: Test an image in C#
 
+Your `CustomVision.xaml.cs` file should look like this
+
 ```csharp
-using System.Diagnostics;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using System;
 using System.IO;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
-using Plugin.Media.Abstractions;
 using Xamarin.Forms;
+using Newtonsoft.Json.Linq;
+using System.Linq;
 
-namespace NotHotdog
+namespace Tabs
 {
-    public partial class ResultPage : ContentPage
+    public partial class CustomVision : ContentPage
     {
-        public ResultPage(MediaFile file)
+        public CustomVision()
         {
             InitializeComponent();
-
-			image.Source = ImageSource.FromStream(() =>
-			{
-				var stream = file.GetStream();
-				file.Dispose();
-				return stream;
-			});
-
-            // Call method to make prediction
-            MakePredictionRequest(file);
         }
 
-	    static byte[] GetImageAsByteArray(MediaFile file)
-		{
+        private async void loadCamera(object sender, EventArgs e)
+        {
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await DisplayAlert("No Camera", ":( No camera available.", "OK");
+                return;
+            }
+
+            MediaFile file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+            {
+                PhotoSize = PhotoSize.Medium,
+                Directory = "Sample",
+                Name = $"{DateTime.UtcNow}.jpg"
+            });
+
+            if (file == null)
+                return;
+
+            image.Source = ImageSource.FromStream(() =>
+            {
+                return file.GetStream();
+            });
+
+
+            await MakePredictionRequest(file);
+        }
+
+        static byte[] GetImageAsByteArray(MediaFile file)
+        {
             var stream = file.GetStream();
-			BinaryReader binaryReader = new BinaryReader(stream);
-			return binaryReader.ReadBytes((int)stream.Length);
-		}
+            BinaryReader binaryReader = new BinaryReader(stream);
+            return binaryReader.ReadBytes((int)stream.Length);
+        }
 
-		static async Task MakePredictionRequest(MediaFile file)
-		{
-			var client = new HttpClient();
+        async Task MakePredictionRequest(MediaFile file)
+        {
+            var client = new HttpClient();
 
-			// Request headers - replace this example key with your valid subscription key.
-			client.DefaultRequestHeaders.Add("Prediction-Key", "a51ac8a57d4e4345ab0a48947a4a90ac");
+            client.DefaultRequestHeaders.Add("Prediction-Key", "a51ac8a57d4e4345ab0a48947a4a90ac");
 
-			// Prediction URL - replace this example URL with your valid prediction URL.
-			string url = "https://southcentralus.api.cognitive.microsoft.com/customvision/v1.0/Prediction/4da1555c-14ca-4aaf-af01-d6e1e97e5fa6/image?iterationId=7bc76035-3825-4643-917e-98f9d9f79b71";
+            string url = "https://southcentralus.api.cognitive.microsoft.com/customvision/v1.0/Prediction/4da1555c-14ca-4aaf-af01-d6e1e97e5fa6/image?iterationId=7bc76035-3825-4643-917e-98f9d9f79b71";
 
-			HttpResponseMessage response;
+            HttpResponseMessage response;
 
-			// Request body. Try this sample with a locally stored image.
-			byte[] byteData = GetImageAsByteArray(file);
+            byte[] byteData = GetImageAsByteArray(file);
 
-			using (var content = new ByteArrayContent(byteData))
-			{
-				content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
-				response = await client.PostAsync(url, content);
-				Debug.WriteLine(await response.Content.ReadAsStringAsync());
-			}
-		}
+            using (var content = new ByteArrayContent(byteData))
+            {
+
+                content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
+                response = await client.PostAsync(url, content);
+
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseString = await response.Content.ReadAsStringAsync();
+           
+                    JObject rss = JObject.Parse(responseString);
+
+					//Querying with LINQ
+                    //Get all Prediction Values
+					var Probability = from p in rss["Predictions"] select (string)p["Probability"];
+                    var Tag = from p in rss["Predictions"] select (string)p["Tag"];
+
+                    //Truncate values to labels in XAML
+                    foreach (var item in Tag)
+					{
+						TagLabel.Text += item + ": \n";
+					}
+
+                    foreach (var item in Probability)
+                    {
+                        PredictionLabel.Text += item + "\n";
+                    }
+
+                }
+
+                //Get rid of file once we have finished using it
+                file.Dispose();
+            }
+        }
     }
 }
+
+```
+
+And your `CustomVision.xaml` file should look like this
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Tabs.CustomVision" Title="Custom Vision">
+    <StackLayout Margin="20" Orientation="Vertical">
+        <Button Text="Take Photo and Analyze" Clicked="loadCamera" />
+        <StackLayout Orientation="Horizontal">
+            <Label x:Name="TagLabel">
+            </Label>
+            <Label x:Name="PredictionLabel">
+            </Label>
+        </StackLayout>
+        <Image x:Name="image" Aspect="AspectFit"/>
+    </StackLayout>
+</ContentPage>
 ```
 ## Resources
 ### Bootcamp Content
