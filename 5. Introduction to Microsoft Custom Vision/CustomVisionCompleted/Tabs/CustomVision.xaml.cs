@@ -7,6 +7,9 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System.Linq;
 
 namespace Tabs
 {
@@ -56,26 +59,53 @@ namespace Tabs
         async Task MakePredictionRequest(MediaFile file)
         {
             var client = new HttpClient();
-            
+
             client.DefaultRequestHeaders.Add("Prediction-Key", "a51ac8a57d4e4345ab0a48947a4a90ac");
-            
+
             string url = "https://southcentralus.api.cognitive.microsoft.com/customvision/v1.0/Prediction/4da1555c-14ca-4aaf-af01-d6e1e97e5fa6/image?iterationId=7bc76035-3825-4643-917e-98f9d9f79b71";
 
             HttpResponseMessage response;
-            
+
             byte[] byteData = GetImageAsByteArray(file);
 
             using (var content = new ByteArrayContent(byteData))
             {
-               
+
                 content.Headers.ContentType = new MediaTypeHeaderValue("application/octet-stream");
                 response = await client.PostAsync(url, content);
-                Debug.WriteLine(await response.Content.ReadAsStringAsync());
+
+
+                if (response.IsSuccessStatusCode)
+                {
+                    var responseString = await response.Content.ReadAsStringAsync();
+           
+                    JObject rss = JObject.Parse(responseString);
+
+					//Querying with LINQ
+                    //Get all Prediction Values
+					var Probability = from p in rss["Predictions"] select (string)p["Probability"];
+                    var Tag = from p in rss["Predictions"] select (string)p["Tag"];
+
+                    //Truncate values to labels in XAML
+                    foreach (var item in Tag)
+					{
+						TagLabel.Text += item + ": \n";
+					}
+
+                    foreach (var item in Probability)
+                    {
+                        PredictionLabel.Text += item + "\n";
+                    }
+
+                }
+
+                //Get rid of file once we have finished using it
                 file.Dispose();
-			}
+            }
 
-			
 
-		}
+
+
+        }
     }
 }
