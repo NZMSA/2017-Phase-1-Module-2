@@ -31,7 +31,7 @@ namespace Tabs
             {
                 PhotoSize = PhotoSize.Medium,
                 Directory = "Sample",
-                Name = String.Format("{0}.jpg", DateTime.Now.Date.ToString())
+                Name = $"{DateTime.UtcNow}.jpg"
             });
 
             if (file == null)
