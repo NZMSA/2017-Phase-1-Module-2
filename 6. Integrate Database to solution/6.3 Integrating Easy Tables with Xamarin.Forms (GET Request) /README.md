@@ -254,6 +254,151 @@ namespace Tabs
 
 [More Info on ListView](https://developer.xamarin.com/guides/xamarin-forms/user-interface/listview/) about customising the appearance of your list view
 
+## Extra for experts 
+### Reverse geocode a street address
+#### How to convert latitude and longitude coordinates to a street address
+##### This tutorial shows how to reverse geocode user supplied latitude and longitude coordinates into a street address by using the `Geocoder` class included in Xamarin.Forms.Maps.
+
+### Overview
+The Xamarin.Forms.Maps NuGet package is used to add maps to a Xamarin.Forms app, and uses the native map APIs on each platform. This NuGet package provides the Geocoder class that converts between string addresses and latitude and longitudes.
+
+`By using the native map APIs on each platform Xamarin.Forms.Maps provides a fast, familiar maps experience for users, but means that some configuration steps are required to adhere to each platforms specific API requirements. For information about these configuration steps see Working with Maps in Xamarin.Forms.`
+
+In the code building the user interface for a page, import the Xamarin.Forms.Maps namespace and create an instance of the Geocoder class.
+
+Then for user supplied latitude and longitude coordinates call the GetAddressesForPositionAsync method on the Geocoder instance in order to asynchronously get a list of addresses near the position.
+
+Your AzureTable.xaml.cs file should look like this: 
+
+```csharp
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.WindowsAzure.MobileServices;
+using Xamarin.Forms;
+using Xamarin.Forms.Maps;
+
+namespace Tabs
+{
+    public partial class AzureTable : ContentPage
+    {
+		Geocoder geoCoder;
+       
+        public AzureTable()
+        {
+            InitializeComponent();
+            geoCoder = new Geocoder();
+
+		}
+
+		async void Handle_ClickedAsync(object sender, System.EventArgs e)
+		{
+			List<NotHotDogModel> notHotDogInformation = await AzureManager.AzureManagerInstance.GetHotDogInformation();
+
+			foreach (NotHotDogModel model in notHotDogInformation)
+			{
+				var position = new Position(model.Latitude, model.Longitude);
+				var possibleAddresses = await geoCoder.GetAddressesForPositionAsync(position);
+				foreach (var address in possibleAddresses)
+                    model.City = address;
+			}
+
+			HotDogList.ItemsSource = notHotDogInformation;
+
+		}
+
+    }
+}
+```
+
+Notice we set the address to the model property `City` so that it can be used as a binding in the xaml file. 
+
+```csharp
+model.City = address;
+```
+
+Too accomodate the extra street address we will update the `AzureTables.xaml` file to look like this:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="Tabs.AzureTable" Title="Information">
+    <ContentPage.Padding>
+        <OnPlatform x:TypeArguments="Thickness" iOS="0, 20, 0, 0" />
+    </ContentPage.Padding>
+    <ContentPage.Content>
+        <StackLayout>
+            <Button Text="See Photo Information" TextColor="White" BackgroundColor="Red" Clicked="Handle_ClickedAsync" />
+            <ListView x:Name="HotDogList" HasUnevenRows="true">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50*" />
+                                    <ColumnDefinition Width="50*" />
+                                </Grid.ColumnDefinitions>
+                                <Label Grid.Column="0" Text="{Binding City}" Margin="20,0,0,0"/>
+                                <Label Text="{Binding Happiness}" />
+                                <StackLayout Grid.Column="1" Orientation="Vertical" Margin="0,0,20,0">
+                                    <Label Text="{Binding Longitude, StringFormat='Longitude: {0:N}'}" HorizontalTextAlignment="End"/>
+                                    <Label Text="{Binding Latitude, StringFormat='Latitude: {0:N}'}" HorizontalTextAlignment="End"/>
+                                </StackLayout>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
+```
+Notice we have added a grid view with two columns and setting the margins on either side to 20px to make it look nicer. Below is a representation of where the padding/Margin is applied to. 
+
+```xml
+Margin = "Left, Top, Right, Bottom"
+```
+
+The text in the second grid is right aligned due to the following line
+
+```xml
+HorizontalTextAlignment="End"
+```
+
+## `IMPORTANT`
+
+## Maps Initialization
+
+When adding maps to a Xamarin.Forms application, Xamarin.Forms.Maps is a a separate NuGet package that you should add to every project in the solution. On Android, this also has a dependency on GooglePlayServices (another NuGet) which is downloaded automatically when you add Xamarin.Forms.Maps.
+
+After installing the NuGet package, some initialization code is required in each application project, after the `Xamarin.Forms.Forms.Init` method call. For iOS use the following code:
+
+```csharp
+Xamarin.FormsMaps.Init();
+```
+
+On Android you must pass the same parameters as Forms.Init:
+
+```csharp
+Xamarin.FormsMaps.Init(this, bundle);
+```
+
+For the Windows Runtime (WinRT) and the Universal Windows Platform (UWP) use the following code:
+
+```csharp
+Xamarin.FormsMaps.Init("INSERT_AUTHENTICATION_TOKEN_HERE");
+```
+
+Add this call in the following files for each platform:
+
+iOS - AppDelegate.cs file, in the FinishedLaunching method.
+Android - MainActivity.cs file, in the OnCreate method.
+WinRT and UWP - MainPage.xaml.cs file, in the MainPage constructor.
+Once the NuGet package has been added and the initialization method called inside each applcation, Xamarin.Forms.Maps APIs can be used in the common PCL or Shared Project code.
+
+Source: [Maps Initialization](https://developer.xamarin.com/guides/xamarin-forms/user-interface/map/#Maps_Initialization)
 
 #### `[Extra Information]` 
 ##### *Example doesn't apply in this tutorial, just information to let you know that this is an option available*
