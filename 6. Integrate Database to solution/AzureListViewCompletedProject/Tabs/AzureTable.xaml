@@ -6,25 +6,14 @@
     <ContentPage.Content>
         <StackLayout>
             <Button Text="See Photo Information" TextColor="White" BackgroundColor="Red" Clicked="Handle_ClickedAsync" />
-            <ListView x:Name="HotDogList" HasUnevenRows="true">
+            <ListView x:Name="HotDogList" HasUnevenRows="false">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="50*" />
-                                    <ColumnDefinition Width="50*" />
-                                </Grid.ColumnDefinitions>
-                                <Label Grid.Column="0" Text="{Binding City}" Margin="20,0,0,0"/>
-                                <Label Text="{Binding Happiness}" />
-                                <StackLayout Grid.Column="1" Orientation="Vertical" Margin="0,0,20,0">
-                                    <Label Text="{Binding Longitude, StringFormat='Longitude: {0:N}'}" HorizontalTextAlignment="End"/>
-                                    <Label Text="{Binding Latitude, StringFormat='Latitude: {0:N}'}" HorizontalTextAlignment="End"/>
-                                </StackLayout>
-                            </Grid>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="{Binding Longitude, StringFormat='Longitude: {0:N}'}" HorizontalOptions="FillAndExpand" Margin="20,0,0,0" VerticalTextAlignment="Center" />
+                                <Label Text="{Binding Latitude, StringFormat='Latitude: {0:N}'}" VerticalTextAlignment="Center" Margin="0,0,20,0" />
+                            </StackLayout>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>

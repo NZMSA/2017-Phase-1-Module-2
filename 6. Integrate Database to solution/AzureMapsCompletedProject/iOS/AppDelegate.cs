@@ -10,7 +10,7 @@ namespace Tabs.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             Microsoft.WindowsAzure.MobileServices.CurrentPlatform.Init();
-
+            Xamarin.FormsMaps.Init();
 			// Code for starting up the Xamarin Test Cloud Agent
 #if DEBUG
 			Xamarin.Calabash.Start();
