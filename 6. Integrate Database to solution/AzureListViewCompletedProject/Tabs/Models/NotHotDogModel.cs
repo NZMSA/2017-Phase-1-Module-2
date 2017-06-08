@@ -13,5 +13,7 @@ namespace Tabs
 
 		[JsonProperty(PropertyName = "Latitude")]
 		public float Latitude { get; set; }
+
+        public string City { get; set; }
     }
 }
