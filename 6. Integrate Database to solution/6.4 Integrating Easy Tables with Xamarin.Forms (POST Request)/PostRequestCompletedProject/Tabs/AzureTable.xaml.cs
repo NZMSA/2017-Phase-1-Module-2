@@ -20,6 +20,7 @@ namespace Tabs
 
 		async void Handle_ClickedAsync(object sender, System.EventArgs e)
 		{
+            loading.IsRunning = true;
 			List<NotHotDogModel> notHotDogInformation = await AzureManager.AzureManagerInstance.GetHotDogInformation();
 
 			foreach (NotHotDogModel model in notHotDogInformation)
@@ -31,7 +32,7 @@ namespace Tabs
 			}
 
 			HotDogList.ItemsSource = notHotDogInformation;
-
+            loading.IsRunning = false;
 		}
 
     }
