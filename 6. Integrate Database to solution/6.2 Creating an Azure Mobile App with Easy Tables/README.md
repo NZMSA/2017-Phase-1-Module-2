@@ -49,7 +49,7 @@ Since we already setup the database, the only thing left to do is Initialize the
 
 After a few moments, the app will be fully initialized so we can add our first table of the database named NotHotDogModel. If you are adding Azure Mobile Apps to an existing application, this table name should match the class name of the data you with to store. The beautiful part of Easy Tables is that it will automatically update and add the columns in the table dynamically based on the data we pass in. For this example, I’ll simply allow full anonymous access to the table, however it is possible to add authentication with Facebook, Twitter, Google, Microsoft, and other OAuth login providers.
 
-![Add Table](photos/Add Table.png)
+![Add Table](photos/AddTable.png)
 
 ### Important
 For this tutorial make sure you have an easy table in your mobile backend called `NotHotDogModel`, as we reference it by name 
