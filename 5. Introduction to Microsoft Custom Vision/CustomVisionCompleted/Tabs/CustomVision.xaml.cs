@@ -100,10 +100,6 @@ namespace Tabs
                 //Get rid of file once we have finished using it
                 file.Dispose();
             }
-
-
-
-
         }
     }
 }
