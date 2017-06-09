@@ -1,4 +1,4 @@
-# Integrating Camera in Xamarin Forms
+# 4. Integrating Camera in Xamarin Forms
 
 ## 1. Installing the Nuget Package
 

@@ -44,7 +44,6 @@ namespace Tabs
 				return file.GetStream();
 			});
 
-         
             await postLocationAsync(); 
 
 			await MakePredictionRequest(file);

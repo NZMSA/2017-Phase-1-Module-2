@@ -1,16 +1,6 @@
-# 4. Introduction to Microsoft Custom Vision Service
+# 5. Microsoft Custom Vision Service Integration
 ## Introduction
 This repo contains the Windows client library & sample for the Microsoft Custom Vision Service, an offering within [Microsoft Cognitive Services](https://www.microsoft.com/cognitive-services)
-
-## The Prediction Client Library
-The prediction client library is an automatically generated C\# wrapper that allows you to make predictions against trained endpoints.
-
-The easiest way to get the prediction client library is to get the [Microsoft.Cognitive.CustomVision.Prediction](https://www.nuget.org/packages/Microsoft.Cognitive.CustomVision.Prediction/) package from [nuget](<http://nuget.org>). 
-
-## The Training Client Library
-The training client library is automatically generated C\# wrapper that allows you to create, manage and train Custom Vision projects programatically. All operations on the [website](<https://customvision.ai>) are exposed through this library, allowing you to automate all aspects of the Custom Vision Service.
-
-The easiest way to get the training client library is to get the [Microsoft.Cognitive.CustomVision.Training](https://www.nuget.org/packages/Microsoft.Cognitive.CustomVision.Training/) package from [nuget](<http://nuget.org>).
 
 ## Learning Outcomes
 * Understand Microsoft Custom Vision Service to an introductory level.
@@ -116,7 +106,7 @@ namespace Tabs
 
                     //Querying with LINQ
                     //Get all Prediction Values
-					var Probability = from p in rss["Predictions"] select (string)p["Probability"];
+                    var Probability = from p in rss["Predictions"] select (string)p["Probability"];
                     var Tag = from p in rss["Predictions"] select (string)p["Tag"];
 
                     //Truncate values to labels in XAML
@@ -163,6 +153,12 @@ And your `CustomVision.xaml` file should look like this
 * [Slide Deck](http://link.com) (Will be up soon!)
 * [Video](http://link.com) (Will be up soon!)
 
-### Tools
+## [MORE INFO] The Prediction Client Library
+The prediction client library is an automatically generated C\# wrapper that allows you to make predictions against trained endpoints.
 
-### Extra Learning Resources
+The easiest way to get the prediction client library is to get the [Microsoft.Cognitive.CustomVision.Prediction](https://www.nuget.org/packages/Microsoft.Cognitive.CustomVision.Prediction/) package from [nuget](<http://nuget.org>). 
+
+## The Training Client Library
+The training client library is automatically generated C\# wrapper that allows you to create, manage and train Custom Vision projects programatically. All operations on the [website](<https://customvision.ai>) are exposed through this library, allowing you to automate all aspects of the Custom Vision Service.
+
+The easiest way to get the training client library is to get the [Microsoft.Cognitive.CustomVision.Training](https://www.nuget.org/packages/Microsoft.Cognitive.CustomVision.Training/) package from [nuget](<http://nuget.org>).
