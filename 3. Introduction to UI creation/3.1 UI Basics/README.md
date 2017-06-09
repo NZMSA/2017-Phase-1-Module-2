@@ -1,5 +1,9 @@
 # Introduction to Xamarin UI Creation
 
+## `NOT A STEP BY STEP GUIDE`
+
+The contents of this file in particular are just for your knowledge.
+
 You will learn the key elements we use to create User Interfaces in Xamarin.Forms.
 
 # Making a new Xamarin Forms Project
