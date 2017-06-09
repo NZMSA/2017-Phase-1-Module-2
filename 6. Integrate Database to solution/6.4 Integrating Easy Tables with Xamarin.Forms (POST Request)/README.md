@@ -1,7 +1,7 @@
 # 6.4 Integrating Easy Tables with Xamarin.Forms (POST Request) 
 
-## 6.4.1 Posting timeline data
-To post a new timeline entry to our backend, we can invoke a `InsertAsync(notHotDogModel)` method call, where `notHotDogModel` is a NotHotDogModel object.
+## 6.4.1 Posting Hot Dog Information
+To post a new notHotDogModel entry to our backend, we can invoke a `InsertAsync(notHotDogModel)` method call, where `notHotDogModel` is a NotHotDogModel object.
 
 Lets create a `PostHotDogInformation` method in our `AzureManager.cs` file
 
@@ -68,15 +68,15 @@ Since our Model is the same as our Easy table column names azure manager knows t
 This creates a `NotHotDogModel` object and sets up the values from the `position` (from CrossGeolocator) and then adds it to backends database
 
 ### 6.4.2 [More Info] Updating and deleting notHotDogModel data
-To edit an existing timeline entry in our backend, we can invoke a `UpdateAsync(notHotDogModel)` method call, where `notHotDogModel` is a Timeline object. 
+To edit an existing notHotDogModel entry in our backend, we can invoke a `UpdateAsync(notHotDogModel)` method call, where `notHotDogModel` is a NotHotDogModel object. 
 
-The `Id` of the timeline object needs to match the one we want to edit as the backend uses the `id` field to identify which row to update. This applies to delete as well.
+The `Id` of the notHotDogModel object needs to match the one we want to edit as the backend uses the `id` field to identify which row to update. This applies to delete as well.
 
-Timeline entries that we retrieve by `ToListAsync()`, will have all the object's corresponding `Id` attached and the object returned by the result of `InsertAsync()` will also have its `Id` attached.
+NotHotDogModel entries that we retrieve by `ToListAsync()`, will have all the object's corresponding `Id` attached and the object returned by the result of `InsertAsync()` will also have its `Id` attached.
 
 Lets create a `UpdateHotDogInformation` method in our `AzureManager` activity 
 ```Csharp
-    public async Task UpdateTimeline(NotHotDogModel notHotDogModel) {
+    public async Task UpdateHotDogInformation(NotHotDogModel notHotDogModel) {
         await this.notHotDogTable.UpdateAsync(notHotDogModel);
     }
 ``` 
@@ -84,10 +84,10 @@ Lets create a `UpdateHotDogInformation` method in our `AzureManager` activity
 NOTE: If no `Id` is present, an `ArgumentException` is raised.
 
 
-To edit an existing timeline entry in our backend, we can invoke a `DeleteAsync(notHotDogModel)` method call, where `notHotDogModel` is a Timeline object. 
+To edit an existing notHotDogModel entry in our backend, we can invoke a `DeleteAsync(notHotDogModel)` method call, where `notHotDogModel` is a NotHotDogModel object. 
 Likewise information concerning `Id` applies to delete as well.
 
-Lets create a `DeleteTimeline` method in our `AzureManager` activity 
+Lets create a `DeleteHotDogInformation` method in our `AzureManager` activity 
 ```Csharp
     public async Task DeleteHotDogInformation(NotHotDogModel notHotDogModel) {
         await this.notHotDogTable.DeleteAsync(notHotDogModel);
