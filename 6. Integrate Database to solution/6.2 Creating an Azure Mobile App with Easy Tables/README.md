@@ -72,17 +72,17 @@ GET Request and response (If yours doesnt show any data ie just `[]` that means 
 ![GET Request](photos/GET_request.png)
 
 Here we can see it matches well with whats in our current backend database (with data)
-![GET Request](photos/data_in_table.png)
+![GET Request]
 
 Now with a POST request, we want to add new information to the backend database
 Because its easy tables, the schema is adjusted to what we send because it dynamically matches. So we can use any key and value pairings but to keep it consisent its normally better to keep to one schema rather than change it every 5 mins.
 
-We will send a JSON request with happiness, sadness and anger values
+We will send a JSON request with Latitude and Longitude values
 (Note the body-content type is `raw` and of `JSON (application/json)` type)
-![POST Request](photos/POST_request.png)
+![POST Request](photos/data_in_table.png)
 
 Now we see that it has added the new entry to our database. 
-![POST Request](photos/data_in_table_updated.png)
+![Data in table updated](photos/data_in_table_updated.png)
 
 NOTE: The other fields we didnt give values in our POST request (contempt, disgust ..) are defaulted to null values
 
