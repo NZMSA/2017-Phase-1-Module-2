@@ -139,7 +139,7 @@ Merge a branch with the currently selected branch. You can instead do a 'Pull Re
 
 ## Resources
 ### Bootcamp Content
-* [Slide Deck](/Setting up Git using GitHub.pptx)
+* [Slide Deck](https://github.com/NZMSA/2017-Phase-1-Module-2/blob/master/2.%20Introduction%20to%20Git/Setting%20up%20Git%20using%20GitHub.pptx)
 * [Video](http://link.com) (Will be up soon!)
 
 ### Tools
