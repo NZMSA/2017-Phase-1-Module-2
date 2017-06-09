@@ -19,3 +19,6 @@ Completed and passed Phase-1 of the course.
 * [GitHub Online Training](https://try.github.io/)
 * [GitHub Guide](https://guides.github.com/)
 * [Emmet Snippet Extension Cheat Sheet](http://docs.emmet.io/cheat-sheet/)
+
+### NOTE: 
+#### The following documentation is supplementary to the in person workshops. The documentation is under progress and will be updated when required. 
