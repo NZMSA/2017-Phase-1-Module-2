@@ -6,6 +6,22 @@
 
 ## 2. Permissions
 
+The WRITE_EXTERNAL_STORAGE & READ_EXTERNAL_STORAGE permissions are required, but the library will automatically add this for you. Additionally, if your users are running Marshmallow the Plugin will automatically prompt them for runtime permissions. You must add the Permission Plugin code into your Main or Base Activities:
+
+```
+public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Permission[] grantResults)
+{
+    PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+}
+```
+
+By adding these permissions Google Play will automatically filter out devices without specific hardware. You can get around this by adding the following to your AssemblyInfo.cs file in your Android project:
+
+```
+[assembly: UsesFeature("android.hardware.camera", Required = false)]
+[assembly: UsesFeature("android.hardware.camera.autofocus", Required = false)]
+```
+
 * If your application is targeting Android N (API 24) then you must add the following lines to your manifest file inside the application tag.
 
 ```xml
@@ -17,6 +33,20 @@
                 android:resource="@xml/file_paths"></meta-data>
 </provider>
 ```
+
+`YOUR_APP_PACKAGE_NAME` must be set to your app package name!
+
+* Add a new folder called xml into your Resources folder and add a new XML file called file_paths.xml
+
+```
+<?xml version="1.0" encoding="utf-8"?>
+<paths xmlns:android="http://schemas.android.com/apk/res/android">
+    <external-path name="my_images" path="Android/data/YOUR_APP_PACKAGE_NAME/files/Pictures" />
+    <external-path name="my_movies" path="Android/data/YOUR_APP_PACKAGE_NAME/files/Movies" />
+</paths>
+```
+
+`YOUR_APP_PACKAGE_NAME` must be set to your app package name!
 
 For iOS, open info.plst and add the following lines to that file.
 
