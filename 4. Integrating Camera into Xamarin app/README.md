@@ -2,21 +2,9 @@
 
 ## 1. Installing the Nuget Package
 
-* Firstly search for and install ```Xam.Plugin.Media``` in all your projects.
+* Firstly search for and install `Xam.Plugin.Media` in *`all`* your projects.
 
 ## 2. Permissions
-
-For Android, since API 23, much like on iOS, if you want to access the camera you have to request permissions during runtime.
-
-* Expand your Android project and open 'MainActivity.cs'
-* Add the following lines of code
-
-```csharp
-public override void OnRequestPermissionsResult(int requestCode, string[] permissions, Android.Content.PM.Permission[] grantResults)
-{
-	PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-}
-```
 
 * If your application is targeting Android N (API 24) then you must add the following lines to your manifest file inside the application tag.
 
@@ -28,17 +16,6 @@ public override void OnRequestPermissionsResult(int requestCode, string[] permis
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS" 
                 android:resource="@xml/file_paths"></meta-data>
 </provider>
-```
-
-* Inside the resouce file within your Android project, create a new folder called 'xml' and inside that folder, create a new .xml file called 'file_paths.xml'
-* Add the following lines of code to that file.
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <external-path name="my_images" path="Android/data/YOUR_APP_PACKAGE_NAME/files/Pictures" />
-    <external-path name="my_movies" path="Android/data/YOUR_APP_PACKAGE_NAME/files/Movies" />
-</paths>
 ```
 
 For iOS, open info.plst and add the following lines to that file.
@@ -55,60 +32,104 @@ For iOS, open info.plst and add the following lines to that file.
 ## 3. Taking photos
 
 * First we'll modify the layout of our main page.
-* Add the following lines of code
+* Add the following lines of code to our `CustomVision.xaml` file
 
 ```xml
-<StackLayout BackgroundColor="White">
-      <Button Text="Take Picture" TextColor="White" BackgroundColor="Green" Clicked="TakePicture_Clicked" />
-      <Image x:Name="image" VerticalOptions="Start" />
-    </StackLayout>
+<StackLayout Margin="20" Orientation="Vertical">
+	<Button Text="Take Photo and Analyze" Clicked="loadCamera" />
+	<Image x:Name="image" />
+</StackLayout>
 ```
 
-* Navigate to your portable project and inside MainPage.xaml.cs, after creating our button that's going to trigger the camera, you're going to first check if we have permissions to use the camera before takeing a photo. Add the following lines of code.
+* Notice the Clicked method will create a method called loadCamera in your `CustomVision.xaml.cs`
+
+* Navigate to your portable project and inside `CustomVision.xaml.cs`, after creating our button that's going to trigger the camera, you're going to first check if we have permissions to use the camera before taking a photo. Add the following lines of code.
 
 ```csharp
-var cameraStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Camera);
-var storageStatus = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Storage);
+await CrossMedia.Current.Initialize();
 
-if (cameraStatus != PermissionStatus.Granted || storageStatus != PermissionStatus.Granted)
+if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
 {
-    var results = await CrossPermissions.Current.RequestPermissionsAsync(new[] {Permission.Camera, Permission.Storage});
-    cameraStatus = results[Permission.Camera];
-    storageStatus = results[Permission.Storage];
+	await DisplayAlert("No Camera", ":( No camera available.", "OK");
+	return;
 }
 ```
 
 * To take a photo add the following lines of code
 
 ```csharp
-if (cameraStatus == PermissionStatus.Granted && storageStatus == PermissionStatus.Granted)
+ MediaFile file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
 {
-	var file = await CrossMedia.Current.TakePhotoAsync(new Plugin.Media.Abstractions.StoreCameraMediaOptions
-	{
-		DefaultCamera = Plugin.Media.Abstractions.CameraDevice.Front,
-		Directory = "Moodify",
-		Name = $"{DateTime.UtcNow}.jpg",
-		CompressionQuality = 92
-	});
-
-	if (file == null)
-		return;
-}
-else
-{
-	await DisplayAlert("Permissions Denied", "Unable to take photos.", "OK");
-	//On iOS you may want to send your user to the settings screen.
-	//CrossPermissions.Current.OpenAppSettings();
-}
+	PhotoSize = PhotoSize.Medium,
+	Directory = "Sample",
+	Name = $"{DateTime.UtcNow}.jpg"
+});
 ```
 
 * To diplay the image add the following lines of code.
 
 ```csharp
+if (file == null)
+	return;
+
 image.Source = ImageSource.FromStream(() =>
 {
-	var stream = file.GetStream();
-	file.Dispose();
-	return stream;
+	return file.GetStream();
 });
+
+file.Dispose();
+```
+
+Your `CustomVision.xaml.cs` file should look like this now: 
+
+```csharp
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using System;
+using System.Diagnostics;
+using System.IO;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using Xamarin.Forms;
+
+namespace Tabs
+{
+    public partial class CustomVision : ContentPage
+    {
+        public CustomVision()
+        {
+            InitializeComponent();
+        }
+
+        private async void loadCamera(object sender, EventArgs e)
+        {
+            await CrossMedia.Current.Initialize();
+
+            if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
+            {
+                await DisplayAlert("No Camera", ":( No camera available.", "OK");
+                return;
+            }
+
+            MediaFile file = await CrossMedia.Current.TakePhotoAsync(new StoreCameraMediaOptions
+            {
+                PhotoSize = PhotoSize.Medium,
+                Directory = "Sample",
+                Name = $"{DateTime.UtcNow}.jpg"
+            });
+
+            if (file == null)
+                return;
+
+            image.Source = ImageSource.FromStream(() =>
+            {
+                return file.GetStream();
+            });
+
+            file.Dispose();
+        }
+    }
+}
+
 ```
