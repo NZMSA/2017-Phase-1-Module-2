@@ -114,16 +114,16 @@ namespace Tabs
            
                     JObject rss = JObject.Parse(responseString);
 
-					//Querying with LINQ
+                    //Querying with LINQ
                     //Get all Prediction Values
 					var Probability = from p in rss["Predictions"] select (string)p["Probability"];
                     var Tag = from p in rss["Predictions"] select (string)p["Tag"];
 
                     //Truncate values to labels in XAML
                     foreach (var item in Tag)
-					{
-						TagLabel.Text += item + ": \n";
-					}
+                    {
+                        TagLabel.Text += item + ": \n";
+                    }
 
                     foreach (var item in Probability)
                     {
