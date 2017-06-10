@@ -38,7 +38,7 @@ The following screenshots focus on the tab format on each platform:
 
 * Click Forms -> Forms ContentPage Xaml
 
-* Call your file AzureTables
+* Call your file AzureTable
 
 ![azureTablesTabCreation](img/azureTablesTabCreation.png)
 
