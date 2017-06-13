@@ -1,13 +1,15 @@
-﻿using Plugin.Media;
-using Plugin.Media.Abstractions;
-using System;
+﻿using System;
+using System.Diagnostics.Contracts;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using Tabs.Model;
 using Xamarin.Forms;
-using Newtonsoft.Json.Linq;
-using System.Linq;
 
 namespace Tabs
 {
@@ -43,6 +45,7 @@ namespace Tabs
                 return file.GetStream();
             });
 
+            TagLabel.Text = "";
 
             await MakePredictionRequest(file);
         }
@@ -56,6 +59,7 @@ namespace Tabs
 
         async Task MakePredictionRequest(MediaFile file)
         {
+            Contract.Ensures(Contract.Result<Task>() != null);
             var client = new HttpClient();
 
             client.DefaultRequestHeaders.Add("Prediction-Key", "a51ac8a57d4e4345ab0a48947a4a90ac");
@@ -76,25 +80,12 @@ namespace Tabs
                 if (response.IsSuccessStatusCode)
                 {
                     var responseString = await response.Content.ReadAsStringAsync();
-           
-                    JObject rss = JObject.Parse(responseString);
 
-					//Querying with LINQ
-                    //Get all Prediction Values
-					var Probability = from p in rss["Predictions"] select (string)p["Probability"];
-                    var Tag = from p in rss["Predictions"] select (string)p["Tag"];
+                    EvaluationModel responseModel = JsonConvert.DeserializeObject<EvaluationModel>(responseString);
 
-                    //Truncate values to labels in XAML
-                    foreach (var item in Tag)
-					{
-						TagLabel.Text += item + ": \n";
-					}
+                    double max = responseModel.Predictions.Max(m => m.Probability);
 
-                    foreach (var item in Probability)
-                    {
-                        PredictionLabel.Text += item + "\n";
-                    }
-
+                    TagLabel.Text = (max >= 0.5) ? "Hotdog" : "Not hotdog";
                 }
 
                 //Get rid of file once we have finished using it
