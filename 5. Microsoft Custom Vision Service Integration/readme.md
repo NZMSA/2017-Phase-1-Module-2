@@ -20,19 +20,50 @@ We have used the Prediction Endpoint to Test Images Programmatically
 
 ## Step 3: Test an image in C#
 
+1. First add the Newtonsoft json NuGet package to your shared project.
+2. Now we'll be adding the model which we will use to deserialise our response from custom vision services to. Right click on your shared project and add a new folder. Call it 'Model'.
+3. Right click on your newly created folder and add a new CS file. Call it 'EvaluationModel.cs'.
+4. Replace the contents of EvaluationModel.cs with the following:
+
+```csharp
+using System;
+using System.Collections.Generic;
+
+namespace Tabs.Model
+{
+    public class EvaluationModel
+    {
+		public string Id { get; set; }
+		public string Project { get; set; }
+		public string Iteration { get; set; }
+		public string Created { get; set; }
+		public List<Prediction> Predictions { get; set; }
+    }
+
+	public class Prediction
+	{
+		public string TagId { get; set; }
+		public string Tag { get; set; }
+		public double Probability { get; set; }
+	}
+}
+```
+
 Your `CustomVision.xaml.cs` file should look like this
 
 ```csharp
-using Plugin.Media;
-using Plugin.Media.Abstractions;
 using System;
+using System.Diagnostics.Contracts;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
+using Plugin.Media;
+using Plugin.Media.Abstractions;
+using Tabs.Model;
 using Xamarin.Forms;
-using Newtonsoft.Json.Linq;
-using System.Linq;
 
 namespace Tabs
 {
@@ -101,24 +132,12 @@ namespace Tabs
                 if (response.IsSuccessStatusCode)
                 {
                     var responseString = await response.Content.ReadAsStringAsync();
-           
-                    JObject rss = JObject.Parse(responseString);
 
-                    //Querying with LINQ
-                    //Get all Prediction Values
-                    var Probability = from p in rss["Predictions"] select (string)p["Probability"];
-                    var Tag = from p in rss["Predictions"] select (string)p["Tag"];
+                    EvaluationModel responseModel = JsonConvert.DeserializeObject<EvaluationModel>(responseString);
 
-                    //Truncate values to labels in XAML
-                    foreach (var item in Tag)
-                    {
-                        TagLabel.Text += item + ": \n";
-                    }
+                    double max = responseModel.Predictions.Max(m => m.Probability);
 
-                    foreach (var item in Probability)
-                    {
-                        PredictionLabel.Text += item + "\n";
-                    }
+                    TagLabel.Text = (max >= 0.5) ? "Hotdog" : "Not hotdog";
 
                 }
 
